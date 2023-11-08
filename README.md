@@ -34,6 +34,13 @@ There are more commands included but they are either unimportant or don't fully 
 If you really feel like helping this garbage fire of a bot, held together by hopes and dreams feel free!
 
 If you add a command and it adds new features, put it in a /commands/ subfolder with your name. If the command expands the current functions put it in an appropriate subfolder.
+
+## Current TODO
+
+- Make bot pvp capable
+- Add easier way to learn bot functionality in game
+- Better song listing to not get kicked
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
