@@ -39,6 +39,14 @@
     ],
     "active": 3
   },
+  "startup": {
+    "messages": [
+      "/smp",
+      "/cmi chat create BotChat",
+      "/chi chat join BotChat"
+    ],
+    "active": false
+  },
   "mode": {
     "server": "smp"
   }

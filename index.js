@@ -32,9 +32,11 @@ bot.loadPlugin(armormanager)
 
 bot.on("spawn", () => {
   console.log(`(${bot.username}) logged in!`)
-  // bot.chat("/smp")
-  // bot.chat("/cmi chat create home")
-  // bot.chat("/cmi chat join home")
+  if (config.startup.active) {
+    for (let i = 0; i < config.startup.messages.length; i++) {
+      bot.chat(config.startup.messages[i])
+    }
+  }
   cmd_handler.load()
 
 })
