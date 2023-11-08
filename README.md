@@ -18,7 +18,7 @@ Some important commands:
 - `:gimmethedrugs` Makes the bot drop it's whole inventory
 - `:say <message>` Bot says whatever it is prompted, helpful if it needs to execute commands
 - `:silent-kill` stops the bot program without any exit message
-- `:tpatome` Used for servers with the /tpa <username> comamand
+- `:tpatome` Used for servers with the /tpa <username> command
 - `:nowplaying` Bot chats the current playing song
 - `:play <song>` Plays song specified, <song> must match song name (excluding .txt)
 - `:playrandom` Plays a random song in the song directory
@@ -37,9 +37,10 @@ If you add a command and it adds new features, put it in a /commands/ subfolder 
 
 ## Current TODO
 
-- Make bot pvp capable
-- Add easier way to learn bot functionality in game
+- Make the bot pvp capable
+- Add an easier way to learn bot functionality in-game
 - Better song listing to not get kicked
+- More modular way to get server info (IP / port)
 
 ## License
 
