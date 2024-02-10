@@ -7,36 +7,36 @@ var hidden = false
 
 var util = require("./../../util.js")
 
-const fs = require('fs');
+const fs = require('fs')
 
-const configFile = './config.json';
+const configFile = './config.json'
 
 function execute(bot, cmd, username, args, handler) {
     connectServer = args[0]
 
     try {
-        const data = fs.readFileSync(configFile, 'utf8');
+        const data = fs.readFileSync(configFile, 'utf8')
 
         // Parse the JSON data
-        const config = JSON.parse(data);
+        const config = JSON.parse(data)
 
         // Modify the desired property
-        config.mode.server = connectServer;
+        config.mode.server = connectServer
 
         // Convert the modified config object back to JSON string
-        const updatedConfig = JSON.stringify(config, null, 2);
+        const updatedConfig = JSON.stringify(config, null, 2)
 
         // Write the updated JSON string back to the file
         fs.writeFile(configFile, updatedConfig, 'utf8', (err) => {
             if (err) {
-                console.error(`Error writing ${configFile}: ${err}`);
-                return;
+                console.error(`Error writing ${configFile}: ${err}`)
+                return
             }
 
-            console.log(`Successfully updated ${configFile}`);
-        });
+            console.log(`Successfully updated ${configFile}`)
+        })
     } catch (err) {
-        console.error(`Error reading ${configFile}: ${err}`);
+        console.error(`Error reading ${configFile}: ${err}`)
     }
     //fs.closeSync(configFile)
 }

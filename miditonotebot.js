@@ -65,7 +65,7 @@ function toNotebot(midiFile, cb) {
 module.exports.toNotebot = toNotebot
 
 function isPercussion(channel) {
-    return channel == 10; //channel 10 reserved for percussion
+    return channel == 10 //channel 10 reserved for percussion
 }
 
 function compileMIDI(midi) {
@@ -100,7 +100,7 @@ function compileNoteFromTrack(trackNum, curNote, curInstrument) {
         return
     // done playing this track
 
-    var noteTime = Math.floor(midi.tracks[trackNum].notes[curNote].time * timeConstant); //convert seconds to minecraft ticks
+    var noteTime = Math.floor(midi.tracks[trackNum].notes[curNote].time * timeConstant) //convert seconds to minecraft ticks
 
     if (isPercussion(midi.tracks[trackNum].channel)) {
         // has to check this again for every note if this track is percussion because percussion can use different notes for different drums
@@ -125,7 +125,7 @@ function convertNote(noteVal, midiTrack) {
     } else if(noteVal >= 78 && noteVal <= 102) {
         return noteVal - 78
     } else {
-        return 0; // deafult to 0 if unknown
+        return 0 // deafult to 0 if unknown
     }
 
 }
@@ -142,11 +142,11 @@ function getMinecraftInstrument(instrumentNumber, midiTrack, drumNoteNumber, mid
 
             if (drumId == 35 || drumId == 36 || drumId == 41 || drumId == 43
                 || drumId == 45 || drumId == 47 || drumId == 48 || drumId == 50
-                || drumId == 58) return 1; //basedrum
+                || drumId == 58) return 1 //basedrum
 
             if (drumId == 37 || drumId == 38 || drumId == 40 || drumId == 49
                 || drumId == 56 || drumId == 60 || drumId == 61 || drumId == 67
-                || drumId == 68 || drumId == 70 || drumId == 78 || drumId == 79) return 2; //snare
+                || drumId == 68 || drumId == 70 || drumId == 78 || drumId == 79) return 2 //snare
 
             if (drumId == 39 || drumId == 42 || drumId == 44 || drumId == 46
                 || drumId == 51 || drumId == 52 || drumId == 53 || drumId == 54
@@ -154,10 +154,10 @@ function getMinecraftInstrument(instrumentNumber, midiTrack, drumNoteNumber, mid
                 || drumId == 63 || drumId == 64 || drumId == 65 || drumId == 66
                 || drumId == 69 || drumId == 71 || drumId == 72 || drumId == 73
                 || drumId == 74 || drumId == 75 || drumId == 76 || drumId == 77
-                || drumId == 80 || drumId == 81) return 3; //hat
+                || drumId == 80 || drumId == 81) return 3 //hat
 
             // default to basedrum if nothing found
-            return 1; //basedrum
+            return 1 //basedrum
         }
     }
 
@@ -179,137 +179,137 @@ function getMinecraftInstrument(instrumentNumber, midiTrack, drumNoteNumber, mid
         if (instrumentNumber >= 0 && instrumentNumber <= 7) {// Piano
 
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 4; //bass
+                MCInstrument = 4 //bass
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 0; //harp
+                MCInstrument = 0 //harp
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bells
+                MCInstrument = 6 //bells
             }
 
         } else if (instrumentNumber >= 8 && instrumentNumber <= 15) {// Chromatic Percussion
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 4; //bass
+                MCInstrument = 4 //bass
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 10; //iron xylophone
+                MCInstrument = 10 //iron xylophone
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 9; // xylophone
+                MCInstrument = 9 // xylophone
             }
 
         } else if (instrumentNumber >= 16 && instrumentNumber <= 23) {// Organ
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 24 && instrumentNumber <= 31) {// Guitar
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 32 && instrumentNumber <= 39) {// Bass
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 40 && instrumentNumber <= 47) {// Strings
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 48 && instrumentNumber <= 55) { // Ensemble
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 56 && instrumentNumber <= 63) {// Brass
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 64 && instrumentNumber <= 71) {// Reed
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 72 && instrumentNumber <= 79) {// Pipe
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit // maybe flute in the future
+                MCInstrument = 13 //bit // maybe flute in the future
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 80 && instrumentNumber <= 87) {// Synth Lead
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 88 && instrumentNumber <= 95) {// Synth Pad
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 96 && instrumentNumber <= 103) {// Synth Effects
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 104 && instrumentNumber <= 111) {// Ethnic
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 13; //bit
+                MCInstrument = 13 //bit
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } else if (instrumentNumber >= 112 && instrumentNumber <= 119) {// Percussive
             if (midiPitch >= 30 && midiPitch <= 54) {
-                MCInstrument = 12; //digeridoo
+                MCInstrument = 12 //digeridoo
             } else if (midiPitch >= 54 && midiPitch <= 78) {
-                MCInstrument = 10; //iron xylophone
+                MCInstrument = 10 //iron xylophone
             } else if (midiPitch >= 78 && midiPitch <= 102) {
-                MCInstrument = 6; //bell
+                MCInstrument = 6 //bell
             }
 
         } /*else if (instrumentNumber >= 120 && instrumentNumber <= 127) {// Sound Effects
@@ -325,5 +325,5 @@ function getMinecraftInstrument(instrumentNumber, midiTrack, drumNoteNumber, mid
     }
 
     // default to harp if nothing found
-    return MCInstrument; //harp
+    return MCInstrument //harp
 }

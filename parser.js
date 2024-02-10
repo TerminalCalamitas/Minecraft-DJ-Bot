@@ -50,7 +50,7 @@ function parse(file) {
   if (data == null || typeof(data) != "string")
     return null
 
-  data = data.split("\n").map(line => line.replace(/\r/, ""));
+  data = data.split("\n").map(line => line.replace(/\r/, ""))
 
   /*data = data.filter(line => {
     if (line == null) return false
@@ -113,13 +113,13 @@ function songInfo(file) {
   let used_pitches = []
   let used_instruments = []
   let noteblocks_list = []
-  let noteblocksByInstrument = {};
+  let noteblocksByInstrument = {}
 
   let songlength = 0
 
   lines.forEach(line => {
     let split = line.split(":")
-    if(split[0] == undefined || split[1] == undefined || split[2] == undefined) return;
+    if(split[0] == undefined || split[1] == undefined || split[2] == undefined) return
     let tick = parseInt(split[0])
     let pitch = parseInt(split[1])
     let instrument = parseInt(split[2])
@@ -158,7 +158,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
 
   if (!isValidFile(file)) {
     if(file.toString().startsWith("http")) {
-      callback(undefined, `${file} appears to be a invalid notebot file, try ${handler.prefix}playurl`); //Tells the user to use the playurl command if it starts with "http"
+      callback(undefined, `${file} appears to be a invalid notebot file, try ${handler.prefix}playurl`) //Tells the user to use the playurl command if it starts with "http"
     }
 		callback(undefined, `The file ${file} could not be found!`)
     tuning = false
@@ -224,14 +224,14 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
     var missing_instruments = Object.keys(nbByInst).map(key => nbByInst[key]).filter(instrument => instrument.length > 0)
 
     if (missing_instruments.length > 0) {
-      let missing = {};
+      let missing = {}
       Object.keys(nbByInst).forEach(key => {
         if (nbByInst[key].length > 0)
           missing[key] = nbByInst[key].length
       })
 
       let message = Object.keys(missing).map(key => {
-        return `&r${instruments_map.lowercase[key]}/&7${instruments_map.blocks[key]} &r(&c${missing[key]}&r)`;
+        return `&r${instruments_map.lowercase[key]}/&7${instruments_map.blocks[key]} &r(&c${missing[key]}&r)`
       }).join(", ")
 
       console.log(`Missing Instruments: ${message}`)
@@ -252,7 +252,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
       if (tuneLater[0].noteblock != null)
       tuneNoteblock(tuneLater[0].noteblock, tuneLater[0].pitch, (success) => {
         tuned.push(tuneLater[0].noteblock)
-        tuneLater.shift();
+        tuneLater.shift()
         if(cancelTune) {
           callback(undefined, undefined)
           cancelTune = false
@@ -331,7 +331,7 @@ function tuneNoteblock(block, pitch, callback) {
         cursorX: 0.5,
         cursorY: 0.5,
         cursorZ: 0.5
-      });
+      })
     }, config.settings.tune_speed*i)
 
 		if(i == play_times-1) {
@@ -420,7 +420,7 @@ function play(bot, noteblocks, file) {
 
     tick++
     nowPlaying.time.current = tick
-  }, 1000/20); // every tick = 50ms
+  }, 1000/20) // every tick = 50ms
 
 }
 

@@ -19,14 +19,14 @@ const openai = new OpenAI({
 
 function loadVariables(){
     try {
-        var config = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
-        let botStyles = config.botgpt.styles;
-        let styleIndex = config.botgpt.active;
-        let activeStyle = botStyles[styleIndex];
-        return activeStyle;
+        var config = JSON.parse(fs.readFileSync("./config.json", "utf-8"))
+        let botStyles = config.botgpt.styles
+        let styleIndex = config.botgpt.active
+        let activeStyle = botStyles[styleIndex]
+        return activeStyle
     } catch (error) {
-        console.error("Error loading config:", error);
-        return null;
+        console.error("Error loading config:", error)
+        return null
     }
 }
 

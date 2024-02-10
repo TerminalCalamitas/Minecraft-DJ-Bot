@@ -7,76 +7,76 @@ var hidden = false
 
 var util = require("./../../util.js")
 
-const fs = require('fs');
+const fs = require('fs')
 
-const configFile = './config.json';
+const configFile = './config.json'
 
 function execute(bot, cmd, username, args, handler) {
-  let activeStyle = 0;
+  let activeStyle = 0
 
   switch (args[0]) {
       case "default":
-          activeStyle = 0;
-          bot.chat("I'm back to normal");
-          break;
+          activeStyle = 0
+          bot.chat("I'm back to normal")
+          break
   
       case "frat-bro":
-          activeStyle = 1;
-          bot.chat("What's up bro?");
-          break;
+          activeStyle = 1
+          bot.chat("What's up bro?")
+          break
   
       case "pirate":
-          activeStyle = 2;
-          bot.chat("Ahoy me mateys");
-          break;
+          activeStyle = 2
+          bot.chat("Ahoy me mateys")
+          break
   
       case "billy":
-          activeStyle = 3;
-          bot.chat("Hi! Billy Mays here!");
-          break;
+          activeStyle = 3
+          bot.chat("Hi! Billy Mays here!")
+          break
   
       case "mario":
-          activeStyle = 4;
-          bot.chat("It's-a me!");
-          break;
+          activeStyle = 4
+          bot.chat("It's-a me!")
+          break
   
       case "guide":
-          activeStyle = 5;
-          bot.chat("How may I be of assistance?");
-          break;
+          activeStyle = 5
+          bot.chat("How may I be of assistance?")
+          break
   
       default:
           if (username !== "Admiral_Porg") {
-              bot.chat("/msg " + username + " !style <style> | Styles available: default, frat-bro, pirate, billy, mario, or guide");
+              bot.chat("/msg " + username + " !style <style> | Styles available: default, frat-bro, pirate, billy, mario, or guide")
           }
-          break;
+          break
   }
   
-  console.log(activeStyle);
+  console.log(activeStyle)
   
   try {
-      const data = fs.readFileSync(configFile, 'utf8');
+      const data = fs.readFileSync(configFile, 'utf8')
   
       // Parse the JSON data
-      const config = JSON.parse(data);
+      const config = JSON.parse(data)
   
       // Modify the desired property
-      config.botgpt.active = activeStyle;
+      config.botgpt.active = activeStyle
   
       // Convert the modified config object back to JSON string
-      const updatedConfig = JSON.stringify(config, null, 2);
+      const updatedConfig = JSON.stringify(config, null, 2)
   
       // Write the updated JSON string back to the file
       fs.writeFile(configFile, updatedConfig, 'utf8', (err) => {
           if (err) {
-              console.error(`Error writing ${configFile}: ${err}`);
-              return;
+              console.error(`Error writing ${configFile}: ${err}`)
+              return
           }
   
-          console.log(`Successfully updated ${configFile}`);
-      });
+          console.log(`Successfully updated ${configFile}`)
+      })
   } catch (err) {
-      console.error(`Error reading ${configFile}: ${err}`);
+      console.error(`Error reading ${configFile}: ${err}`)
   }
     //fs.closeSync(configFile)
 }

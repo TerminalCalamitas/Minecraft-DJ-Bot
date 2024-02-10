@@ -45,14 +45,14 @@ function tp (bot) {
 }
 
 async function dropall(bot) {
-    var inventoryItemCount = bot.inventory.items().length;
-    if (inventoryItemCount === 0) return;
+    var inventoryItemCount = bot.inventory.items().length
+    if (inventoryItemCount === 0) return
     
     while (inventoryItemCount > 0) {
-        const item = bot.inventory.items()[0];
-        //bot.chat(`Threw ${item.name}`);
-        await bot.tossStack(item);
-        inventoryItemCount--;
+        const item = bot.inventory.items()[0]
+        //bot.chat(`Threw ${item.name}`)
+        await bot.tossStack(item)
+        inventoryItemCount--
     }
 }
 
