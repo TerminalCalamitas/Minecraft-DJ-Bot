@@ -15,8 +15,7 @@ function execute(bot, cmd, username, args, handler) {
     }
 
     // whatever code we want
-    let oldmsg = args.toString().replaceAll(","," ")
-    let msg = oldmsg.replaceAll("ß", ",")
+    let msg = args.toString().replaceAll(","," ")
     bot.chat(msg)
 }
 

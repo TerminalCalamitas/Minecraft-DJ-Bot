@@ -13,8 +13,7 @@ function execute(bot, cmd, username, args, handler) {
     const reciever = args.shift()
     
     // make rest of message into a string
-    let oldmsg = args.toString().replaceAll(","," ")
-    let msg = oldmsg.replaceAll("ß", ",")
+    let msg = args.toString().replaceAll(","," ")
     
     // log the username and message in case of bad message
     console.log(username + " said " + msg + " to " + recieve)

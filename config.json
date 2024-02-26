@@ -1,5 +1,6 @@
 {
   "bot": {
+    "username": "BotBPT",
     "auth": "microsoft",
     "host": "mc.dougdougw.com",
     "port": 25565
@@ -8,7 +9,8 @@
     "tune_speed": 80,
     "colors_enabled": true,
     "save_downloaded_songs": true,
-    "max_download_bytes": 10485760
+    "max_download_bytes": 10485760,
+    "prefix": ":"
   },
   "commands_perms": [
     "Admiral_Porg",
@@ -43,5 +45,14 @@
   },
   "mode": {
     "server": "smp"
+  },
+  "owners": [
+    "54360a28-a59c-4006-8001-9ff8c80e4840",
+    "dcc3ce4f-d0b2-42fc-92ce-b1157bd13670",
+    "317f3cee-0d9e-4c47-9670-473e56830248",
+    "9c4f3ae3-5dcf-4df6-a6c8-787dc801069b"
+  ],
+  "server": {
+    "msgRegex": "\/\\[\\[(.+)\\] (.+) -> me\\] (.+)\/ "
   }
 }

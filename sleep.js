@@ -25,8 +25,7 @@ async function sleepInBed(bot, username) {
         bot.chat("/msg " + username + " Going to bed...")
         await bot.sleep(bed)
       } catch (err) {
-        bot.chat("/msg " + username + " " + err.message)
-        //bot.chat(err.message)
+        console.error(err)
       }
     }
 }

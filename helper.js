@@ -1,3 +1,7 @@
+/*
+    This code is currently unused but is a reference for future features
+*/
+
 const { GoalNear, GoalBlock } = require('mineflayer-pathfinder').goals
 const Movements = require('mineflayer-pathfinder').Movements
 const { Vec3 } = require('vec3')
