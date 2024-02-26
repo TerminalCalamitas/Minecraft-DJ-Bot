@@ -12,6 +12,7 @@ A Minecraft bot that can convert and play .midi files using noteblocks. It also 
 The default command prefix is `:`
 
 Some important commands:
+- `:help <optional: command>` If no command is given lists all commands. If a command is given then it will give info about that command.
 - `:botgpt <prompt>` feeds the prompt into ChatGPT
 - `:style <style-name>` Changes how the botgpt command will respond
 - `:convert <File path>` With no args, converts all midi files in songs directory, with args converts provided song.
