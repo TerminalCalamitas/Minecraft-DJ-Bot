@@ -2,7 +2,7 @@ var name = "example"
 var aliases = ["template"]
 var description = "This command us an example"
 var usage = "{prefix}example"
-var enabled = true
+var enabled = false
 var hidden = false
 
 var util = require("./../../util.js")

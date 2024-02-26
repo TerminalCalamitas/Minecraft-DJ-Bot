@@ -5,8 +5,8 @@ var usage = "{prefix}say <message>"
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
-var perms = require("./../../config.json").commands_perms
+var util = require("../../util.js")
+var perms = require("../../config.json").commands_perms
 
 
 function execute(bot, cmd, username, args, handler) {

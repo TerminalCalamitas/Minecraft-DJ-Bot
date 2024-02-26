@@ -5,7 +5,7 @@ var usage = "{prefix}style <style-name>"
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require("../../util.js")
 
 const fs = require('fs')
 

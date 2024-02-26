@@ -5,7 +5,7 @@ var usage = "{prefix}botgpt <prompt>"
 var enabled = true
 var hidden = false
 var fs = require("fs")
-var util = require("./../../util.js")
+var util = require("../../util.js")
 let gpting = false
 
 require('dotenv').config()
@@ -41,7 +41,7 @@ async function execute(bot, cmd, username, args, handler) {
         gpting = true
         try {
         const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo-1106",
+            model: "gpt-3.5-turbo",
             messages: [
                 {"role": "system", "content": "You will respond as '"+ bot.username + "' I am '" + username + "'. " + initPrompt},
                 {"role": "user", "content": msg}
