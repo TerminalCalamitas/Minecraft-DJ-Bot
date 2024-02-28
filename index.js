@@ -28,11 +28,12 @@ var owner_uuids = config.owners;
 console.log("Loading Options")
 // Will load options from runtime args or if they don't exist, load from the config
 var options = {
-    username: process.argv[2] || config.bot.username,
     host: process.argv[3] || config.bot.host,
     port: parseInt(process.argv[4]) ||config.bot.port,
+    username: process.argv[2] || config.bot.username,
     auth: process.argv[5] || config.bot.auth,
-    checkTimeoutInterval: 5555*1000
+    version: "1.20.4",
+    checkTimeoutInterval: 55*1000
 }
 
 //Simple logging for debuging in case a bot isn't launching
@@ -47,14 +48,6 @@ bot.loadPlugin(pvp)
 console.log("Loading plugins...")
 bot.loadPlugin(armormanager)
 console.log("Plugins Loaded")
-
-bot.on('login', () => {
-  console.log("Logged into server.")
-})
-
-bot.once('resourcePack', () => { // resource pack sent by server
-  bot.acceptResourcePack()
-})
 
 bot.on("spawn", () => {
   console.log(`(${bot.username}) running Minecraft-DJ-Bot v${botVersion} logged in!`)
@@ -101,7 +94,7 @@ bot.on("chat", (username, message) => {
   }
 
   if (message.startsWith(cmd_handler.prefix) && username != bot.username) {
-    send_command(message)
+    send_command(username, message)
   }
 })
 
@@ -119,7 +112,7 @@ rl.on('line', (line) => {
   // }
 })
 
-function send_command (message) {// I replace the commas in a message with a unicode character that looks the same. NOTE: this might not work on old versions of minecraft.
+function send_command (username, message) {// I replace the commas in a message with a unicode character that looks the same. NOTE: this might not work on old versions of minecraft.
   message = message.replaceAll(",", "‚") 
   let args = message.slice(cmd_handler.prefix.length).split(" ")
   let command = args.shift()
