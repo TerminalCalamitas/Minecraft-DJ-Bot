@@ -1,12 +1,12 @@
 // Using vars for other files
-var cmd_handler = require("./command-handler.js")
-var util = require("./util.js")
-var config = require("./config.json")
+var cmd_handler = require('./command-handler.js')
+var util = require('./util.js')
+var config = require('./config.json')
 
 // Using const for external dependancies
-const fs = require("fs")
-const { sleep } = require("openai/core.js")
-const mineflayer = require("mineflayer")
+const fs = require('fs')
+const { sleep } = require('openai/core.js')
+const mineflayer = require('mineflayer')
 const autoeat = require('mineflayer-auto-eat').plugin
 const pathfinder = require('mineflayer-pathfinder').pathfinder
 const armormanager = require('mineflayer-armor-manager')
@@ -20,36 +20,40 @@ const rl = readline.createInterface({ // creates our readline interface with our
   output: process.stdout
 })
 
-var botVersion = "1.3"
+var botVersion = '1.3'
 
 var serverRegex = new RegExp(config.server.msgRegex)
-var owner_uuids = config.owners;
+var owner_uuids = config.owners
 
-console.log("Loading Options")
+console.log('Loading Options')
 // Will load options from runtime args or if they don't exist, load from the config
 var options = {
     host: process.argv[3] || config.bot.host,
     port: parseInt(process.argv[4]) ||config.bot.port,
     username: process.argv[2] || config.bot.username,
     auth: process.argv[5] || config.bot.auth,
-    version: "1.20.4",
-    checkTimeoutInterval: 55*1000
+    version: '1.20.4',
+    checkTimeoutInterval: 32*1000
 }
 
 //Simple logging for debuging in case a bot isn't launching
-console.log("Creating bot")
+console.log('Creating bot')
 var bot = mineflayer.createBot(options)
-console.log("Loading plugins")
+console.log('Loading plugins')
 bot.loadPlugin(autoeat)
-console.log("Loading plugins.")
+console.log('Loading plugins.')
 bot.loadPlugin(pathfinder)
-console.log("Loading plugins..")
+console.log('Loading plugins..')
 bot.loadPlugin(pvp)
-console.log("Loading plugins...")
+console.log('Loading plugins...')
 bot.loadPlugin(armormanager)
-console.log("Plugins Loaded")
+console.log('Plugins Loaded')
 
-bot.on("spawn", () => {
+bot.on('resourcePack', () => { // resource pack sent by server
+  bot.acceptResourcePack()
+})
+
+bot.on('spawn', () => {
   console.log(`(${bot.username}) running Minecraft-DJ-Bot v${botVersion} logged in!`)
   if (config.startup.active) {
     for (let i = 0; i < config.startup.messages.length; i++) {
@@ -67,18 +71,18 @@ bot.on('message', async jsonMsg => {
     var match = []
     match = msg.match(serverRegex)
     if (match[3].startsWith(cmd_handler.prefix)) {
-      message = match[3].replaceAll(",", "‚")
-      let args = message.slice(cmd_handler.prefix.length).split(" ")
+      message = match[3].replaceAll(',', '‚')
+      let args = message.slice(cmd_handler.prefix.length).split(' ')
       let command = args.shift()
 
       if (cmd_handler.isCommand(command)) {
         let output = cmd_handler.execute(bot, command, match[2], args)
   
-        if (output.status == "success") {
-          if (typeof output.message == "string")
+        if (output.status == 'success') {
+          if (typeof output.message == 'string')
             bot.chat(util.infoMessage(output.message))
-        } else if (output.status == "error") {
-          if (typeof output.message == "string")
+        } else if (output.status == 'error') {
+          if (typeof output.message == 'string')
             bot.chat(util.errorMessage(output.message))
         }
       }
@@ -87,10 +91,10 @@ bot.on('message', async jsonMsg => {
 })
 
 
-bot.on("chat", (username, message) => {
-  if (message.includes("Welcome to the hub,") && config.mode.server == "smp") {
-    bot.chat("/smp")
-    bot.chat("/home")
+bot.on('chat', (username, message) => {
+  if (message.includes('Welcome to the hub,') && config.mode.server == 'smp') {
+    bot.chat('/smp')
+    bot.chat('/home')
   }
 
   if (message.startsWith(cmd_handler.prefix) && username != bot.username) {
@@ -108,21 +112,22 @@ rl.on('line', (line) => {
   //   send_command(line.toString()) // sends the line entered to command handler
   // } else {
   //   console.log(line)
-  //   console.log("Message must start with " + cmd_handler.prefix)
+  //   console.log('Message must start with ' + cmd_handler.prefix)
   // }
 })
 
-function send_command (username, message) {// I replace the commas in a message with a unicode character that looks the same. NOTE: this might not work on old versions of minecraft.
-  message = message.replaceAll(",", "‚") 
-  let args = message.slice(cmd_handler.prefix.length).split(" ")
+// I replace the commas in a message with a unicode character that looks the same. NOTE: this might not work on old versions of minecraft.
+function send_command (username, message) {
+  message = message.replaceAll(',', '‚') 
+  let args = message.slice(cmd_handler.prefix.length).split(' ')
   let command = args.shift()
 
   if (cmd_handler.isCommand(command)) {
     let output = cmd_handler.execute(bot, command, username, args)
 
-    if (output.status == "success" && typeof output.message == "string") {
+    if (output.status == 'success' && typeof output.message == 'string') {
       bot.chat(util.infoMessage(output.message))
-    } else if (output.status == "error" && typeof output.message == "string") {
+    } else if (output.status == 'error' && typeof output.message == 'string') {
       bot.chat(util.errorMessage(output.message))
     }
   }

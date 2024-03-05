@@ -15,10 +15,10 @@ function come (bot, username) {
     defaultMove.digCost = 1000
     defaultMove.canOpenDoors = true
 
-    bot.chat("/msg " + username + " ! I am coming to you.")
+    bot.chat('/msg ' + username + ' ! I am coming to you.')
     const target = bot.players[username] ? bot.players[username].entity : null
     if (!target) {
-    bot.chat("/msg " + username + " I don\'t see you!")
+    bot.chat('/msg ' + username + ' I don\'t see you!')
     return
     } 
     const p = target.position
@@ -36,7 +36,7 @@ function home (bot, username) {
     
     defaultMove.digCost = 1000
     
-    bot.chat("/msg " + username + " ! I am coming home.")
+    bot.chat('/msg ' + username + ' ! I am coming home.')
 
     bot.pathfinder.setMovements(defaultMove)
     bot.pathfinder.goto(new GoalNear(pos.x, pos.y, pos.z, 1), true) // DYNAMIC GOAL
@@ -44,8 +44,8 @@ function home (bot, username) {
 }
 
 function tp (bot) {
-    bot.chat("/home Home")
-    bot.chat("/msg Gurkenwerfer_ I am home.")
+    bot.chat('/home Home')
+    bot.chat('/msg Gurkenwerfer_ I am home.')
 }
 
 async function dropall(bot) {
@@ -75,37 +75,37 @@ async function bring(bot, username, msg) {
         const glass = item => item.name.includes(msg)
         if (glass) {
             
-            bot.chat("/msg " + username + " I brought you some glass.")
+            bot.chat('/msg ' + username + ' I brought you some glass.')
         } else {
-            bot.chat("/msg " + username + " I couldn\'t find any glass.")
+            bot.chat('/msg ' + username + ' I couldn\'t find any glass.')
         }
         await bot.closeWindow()
     } else {
-        bot.chat("/msg " + username + " I couldn\'t find any chests.")
+        bot.chat('/msg ' + username + ' I couldn\'t find any chests.')
     }
 }
 
 async function kit(bot, username, msg) {
     // check msg against regex
-    bot.chat("/msg " + username + " MSG: " + msg)
+    bot.chat('/msg ' + username + ' MSG: ' + msg)
     let kit = msg.match(/obsidian/)
     if (kit) {
         // find obsidian in inventory
         const obsidian = bot.inventory.items().find(item => item.name.includes('obsidian'))
         if (obsidian) {
             // do something with obsidian
-            bot.chat("/msg " + username + " Delivery started, please accept the tp request.")
-            bot.chat("/tpa " + username)
+            bot.chat('/msg ' + username + ' Delivery started, please accept the tp request.')
+            bot.chat('/tpa ' + username)
             // toss obsidian
             await bot.waitForTicks(60)
             await bot.tossStack(obsidian)
-            bot.chat("/home Home")
+            bot.chat('/home Home')
 
         } else {
-            bot.chat("/msg " + username + " I couldn\'t find any obsidian.")
+            bot.chat('/msg ' + username + ' I couldn\'t find any obsidian.')
         }
     } else {
-        bot.chat("/msg " + username + " I couldn\'t find any kits.")
+        bot.chat('/msg ' + username + ' I couldn\'t find any kits.')
     }
 
 }
@@ -114,69 +114,69 @@ async function bringObby(bot, username) {
     const obsidian = bot.inventory.items().find(item => item.name.includes('glass'))
     if (obsidian) {
         // do something with obsidian
-        bot.chat("/msg " + username + " Delivery started, please accept the tp request.")
-        bot.chat("/tpa " + username)
+        bot.chat('/msg ' + username + ' Delivery started, please accept the tp request.')
+        bot.chat('/tpa ' + username)
         // toss obsidian
-        bot.on("chat", onChat)
+        bot.on('chat', onChat)
         let tpacceptregex = /(.+?)([\w-]+)_? accepted request/
         function onChat(username, message) {
             const match = message.match(tpacceptregex)
             console.log(match)
             if (match) {
-                bot.chat("/msg " + username + " I am coming to you.")
+                bot.chat('/msg ' + username + ' I am coming to you.')
             }
         }
 
         await bot.waitForTicks(240)
         await bot.tossStack(obsidian)
-        bot.chat("/home Home")
+        bot.chat('/home Home')
 
     } else {
-        bot.chat("/msg " + username + " I couldn\'t find any obsidian.")
+        bot.chat('/msg ' + username + ' I couldn\'t find any obsidian.')
     }
 }
 
 async function equipArmor(bot, username, msg) {
     // create switch case for armor types
     switch (msg) {
-        case "helmet":
+        case 'helmet':
             // check inventory for helmet
             const helmet = bot.inventory.items().find(item => item.name.includes('helmet'))
             if (helmet) {
                 // equip helmet
-                await bot.equip(helmet, "head")
-                bot.chat("/msg " + username + " I equipped the helmet.")
+                await bot.equip(helmet, 'head')
+                bot.chat('/msg ' + username + ' I equipped the helmet.')
             }
             break
-        case "chestplate":
+        case 'chestplate':
             // check inventory for chestplate
             const chestplate = bot.inventory.items().find(item => item.name.includes('chestplate'))
             if (chestplate) {
                 // equip chestplate
-                await bot.equip(chestplate, "torso")
-                bot.chat("/msg " + username + " I equipped the chestplate.")
+                await bot.equip(chestplate, 'torso')
+                bot.chat('/msg ' + username + ' I equipped the chestplate.')
             }
             break
-        case "leggings":
+        case 'leggings':
             // check inventory for leggings
             const leggings = bot.inventory.items().find(item => item.name.includes('leggings'))
             if (leggings) {
                 // equip leggings
-                await bot.equip(leggings, "legs")
-                bot.chat("/msg " + username + " I equipped the leggings.")
+                await bot.equip(leggings, 'legs')
+                bot.chat('/msg ' + username + ' I equipped the leggings.')
             }
             break
-        case "boots":
+        case 'boots':
             // check inventory for boots
             const boots = bot.inventory.items().find(item => item.name.includes('boots'))
             if (boots) {
                 // equip boots
-                await bot.equip(boots, "feet")
-                bot.chat("/msg " + username + " I equipped the boots.")
+                await bot.equip(boots, 'feet')
+                bot.chat('/msg ' + username + ' I equipped the boots.')
             }
             break
         default:
-            bot.chat("/msg " + username + " I couldn\'t find any armor.")
+            bot.chat('/msg ' + username + ' I couldn\'t find any armor.')
         }
     
 }

@@ -1,22 +1,22 @@
-var fs = require("fs")
-var util = require("./util.js")
-var instruments_map = require("./instruments_map.json")
-var config = require("./config.json")
-var indexjs = require("./index.js")
-var handler = require("./command-handler.js")
+var fs = require('fs')
+var util = require('./util.js')
+var instruments_map = require('./instruments_map.json')
+var config = require('./config.json')
+var indexjs = require('./index.js')
+var handler = require('./command-handler.js')
 
 var playing = false
 var tuning = false
 var interval = null
 
 var nowPlaying = {
-  "song_name": undefined,
-  "time": {
-    "current": -1,
-    "full": -1
+  'song_name': undefined,
+  'time': {
+    'current': -1,
+    'full': -1
   },
-  "url": undefined,
-  "addedBy": undefined
+  'url': undefined,
+  'addedBy': undefined
 }
 
 var cancelTune = false
@@ -24,13 +24,13 @@ var cancelPlay = false
 
 function resetNowPlaying() {
   nowPlaying = {
-    "song_name": undefined,
-    "time": {
-      "current": -1,
-      "full": -1
+    'song_name': undefined,
+    'time': {
+      'current': -1,
+      'full': -1
     },
-    "url": undefined,
-    "addedBy": undefined
+    'url': undefined,
+    'addedBy': undefined
   }
 }
 
@@ -47,14 +47,14 @@ function parse(file) {
 
   let data = fs.readFileSync(file).toString()
 
-  if (data == null || typeof(data) != "string")
+  if (data == null || typeof(data) != 'string')
     return null
 
-  data = data.split("\n").map(line => line.replace(/\r/, ""))
+  data = data.split('\n').map(line => line.replace(/\r/, ''))
 
   /*data = data.filter(line => {
     if (line == null) return false
-    let split = line.split(":")
+    let split = line.split(':')
     try {
     let tick = parseInt(split[0])
     let pitch = parseInt(split[1])
@@ -68,7 +68,7 @@ function parse(file) {
 
   let parsed = []
   data.forEach((line) => {
-    let split = line.split(":")
+    let split = line.split(':')
     if(split[0] == null || split[1] == null || split[2] == null) return
 
     let tick = parseInt(split[0])
@@ -90,14 +90,14 @@ function songInfo(file) {
   // lines shit
   let lines = fs.readFileSync(file)
   if (lines instanceof Buffer) lines = lines.toString()
-  if (lines == null || typeof(lines) != "string") return null
+  if (lines == null || typeof(lines) != 'string') return null
 
-  lines = lines.split("\n").map(line => line.replace(/\r/, ""))
+  lines = lines.split('\n').map(line => line.replace(/\r/, ''))
 
   //filter out bad lines
   lines = lines.filter(line => {
     if (line == null) return false
-    let split = line.split(":")
+    let split = line.split(':')
     let tick = split[0]
     let pitch = split[1]
     let instrument = split[2]
@@ -118,7 +118,7 @@ function songInfo(file) {
   let songlength = 0
 
   lines.forEach(line => {
-    let split = line.split(":")
+    let split = line.split(':')
     if(split[0] == undefined || split[1] == undefined || split[2] == undefined) return
     let tick = parseInt(split[0])
     let pitch = parseInt(split[1])
@@ -157,8 +157,8 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
   if(callback == null) callback = function(res, err) {if(res){console.log(res)} if(err){console.log(err)} }
 
   if (!isValidFile(file)) {
-    if(file.toString().startsWith("http")) {
-      callback(undefined, `${file} appears to be a invalid notebot file, try ${handler.prefix}playurl`) //Tells the user to use the playurl command if it starts with "http"
+    if(file.toString().startsWith('http')) {
+      callback(undefined, `${file} appears to be a invalid notebot file, try ${handler.prefix}playurl`) //Tells the user to use the playurl command if it starts with 'http'
     }
 		callback(undefined, `The file ${file} could not be found!`)
     tuning = false
@@ -197,7 +197,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
       }
       if(pitches.length == 0) {
         tuning = false
-        callback("Done tuning!", undefined)
+        callback('Done tuning!', undefined)
         return
       }
     })
@@ -232,7 +232,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
 
       let message = Object.keys(missing).map(key => {
         return `&r${instruments_map.lowercase[key]}/&7${instruments_map.blocks[key]} &r(&c${missing[key]}&r)`
-      }).join(", ")
+      }).join(', ')
 
       console.log(`Missing Instruments: ${message}`)
       callback(undefined, `Missing Instruments: ${util.colors(message)}`)
@@ -246,7 +246,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
       if(tuneLater[0] == null) {
         tuning = false
         cancelTune = false
-        callback("Done tuning!", undefined)
+        callback('Done tuning!', undefined)
         return
       }
       if (tuneLater[0].noteblock != null)
@@ -265,7 +265,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
         } else {
           tuning = false
           cancelTune = false
-          callback("Done tuning!", undefined)
+          callback('Done tuning!', undefined)
 				}
       })
     } else {
@@ -287,7 +287,7 @@ function tuneNoteblocks(file, noteblocks_1, instruments_enabled = false, callbac
         } else {
           tuning = false
           cancelTune = false
-          callback("Done tuning!", undefined)
+          callback('Done tuning!', undefined)
 				}
       })
     }
@@ -410,7 +410,7 @@ function play(bot, noteblocks, file) {
         })
         arr.splice(i, 1)
         if(foundBlock == null) {
-          console.log("not found:", note)
+          console.log('not found:', note)
         } else {
           playNoteblock(bot, foundBlock)
         }
@@ -428,7 +428,7 @@ async function playNoteblock(bot, noteblock) {
   //if (noteblock == undefined) return
   bot.stopDigging()
 
-  bot.swingArm("right")
+  bot.swingArm('right')
   // look at the block
   bot.lookAt(noteblock.position.offset(0.5, 0.5, 0.5), 1).then( () => {
   // start digging and immidiatly stop digging

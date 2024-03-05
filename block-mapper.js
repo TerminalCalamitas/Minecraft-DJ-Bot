@@ -1,4 +1,4 @@
-var instruments_map = require("./instruments_map.json")
+var instruments_map = require('./instruments_map.json')
 
 function mapnoteblocks(bot) {
 	var result = []
@@ -8,7 +8,7 @@ function mapnoteblocks(bot) {
 				var pos = bot.blockAt(bot.entity.position.offset(x, y, z))
 				var blockAbove = bot.blockAt(bot.entity.position.offset(x, y + 1, z))
 
-				if (pos.name == "note_block" && (blockAbove.name == "air" || blockAbove.name == "cave_air" || blockAbove.name == "void_air")) {
+				if (pos.name == 'note_block' && (blockAbove.name == 'air' || blockAbove.name == 'cave_air' || blockAbove.name == 'void_air')) {
 					var NBInfo = getNoteBlockInfo(pos)
 					pos.pitch = NBInfo.pitch == undefined ? 0 : NBInfo.pitch
 					pos.instrumentid = NBInfo.instrumentid == undefined ? 0 : NBInfo.instrumentid
@@ -42,9 +42,9 @@ function noteblockInfoFromMetadata(metadata) {
 }
 
 function getNoteBlockInfo(block) {
-	if (block == null) return console.log("Block was null!")
-	if (block.name == null || block.metadata == null) return console.log("Block name or metadata was null!")//should never happend
-	if (block.name != "note_block") return console.log("Expected name 'note_block' got " + block.name)
+	if (block == null) return console.log('Block was null!')
+	if (block.name == null || block.metadata == null) return console.log('Block name or metadata was null!')//should never happend
+	if (block.name != 'note_block') return console.log('Expected name \'note_block\' got ' + block.name)
 
 	return noteblockInfoFromMetadata(block.metadata)
 }

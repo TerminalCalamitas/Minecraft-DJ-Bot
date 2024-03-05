@@ -1,11 +1,11 @@
-var name = "help"
-var aliases = ["commands","cmds", "list"]
-var description = "Help for a command."
-var usage = "{prefix}help <command>"
+var name = 'help'
+var aliases = ['commands','cmds', 'list']
+var description = 'Help for a command.'
+var usage = '{prefix}help <command>'
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require('./../../util.js')
 
 function execute(bot, cmd, username, args, handler) {
 
@@ -19,7 +19,7 @@ function execute(bot, cmd, username, args, handler) {
       if(category_ == null) return
       if (category_.enabled) {
         let commands = Object.keys(category_.commands).map(key => category_.commands[key]).filter(cmd => cmd.enabled).map(cmd => cmd.usage.replace(/{prefix}/g, handler.prefix))
-        util.wait(100*num++).then(() => { bot.chat(util.colors(`${a++ % 2 == 0 ? "&b" : "&3"}&l${util.firstLetterUppercase(category)}:&7 ${commands.join("&r, &7")}`)); })
+        util.wait(100*num++).then(() => { bot.chat(util.colors(`${a++ % 2 == 0 ? '&b' : '&3'}&l${util.firstLetterUppercase(category)}:&7 ${commands.join('&r, &7')}`)); })
       }
     })
   } else {
@@ -32,9 +32,9 @@ function execute(bot, cmd, username, args, handler) {
 
       util.wait(100*2).then(() => { bot.chat(util.infoMessage(`Usage: &b${command.usage.replace(/{prefix}/g, handler.prefix)}`)); })
       
-      util.wait(100*3).then(() => { bot.chat(util.infoMessage(`Aliases: &b${command.aliases.join("&7, &b")}`)); })
+      util.wait(100*3).then(() => { bot.chat(util.infoMessage(`Aliases: &b${command.aliases.join('&7, &b')}`)); })
 
-      util.wait(100*4).then(() => { bot.chat(util.infoMessage(`Enabled: ${(command.enabled) ? "&aEnabled" : "&cDisabled"}`)); })
+      util.wait(100*4).then(() => { bot.chat(util.infoMessage(`Enabled: ${(command.enabled) ? '&aEnabled' : '&cDisabled'}`)); })
     } else
       bot.chat(util.errorMessage(`${handler.prefix}${args[0]} is not a command!`))
   }

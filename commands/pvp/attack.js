@@ -1,16 +1,16 @@
-var name = "attack"
-var aliases = ["fight","fight-me","fightme"]
-var description = "turns on the pvp module"
-var usage = "{prefix}attack"
+var name = 'attack'
+var aliases = ['fight','fight-me','fightme']
+var description = 'turns on the pvp module'
+var usage = '{prefix}attack'
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require('./../../util.js')
 
 
 function execute(bot, cmd, username, args, handler) {
     // whatever code we want
-    bot.chat("yo i was supposed to remove this command")
+    bot.chat('yo i was supposed to remove this command')
 }
 
 module.exports.name = name

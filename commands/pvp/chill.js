@@ -1,16 +1,16 @@
-var name = "stop"
-var aliases = ["chill","secret2"]
-var description = "Tstops the pvp bot module"
-var usage = "{prefix}stop"
+var name = 'stop'
+var aliases = ['chill','secret2']
+var description = 'Tstops the pvp bot module'
+var usage = '{prefix}stop'
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require('./../../util.js')
 
 
 function execute(bot, cmd, username, args, handler) {
     // whatever code we want
-    bot.chat("yo i was supposed to remove this command")
+    bot.chat('yo i was supposed to remove this command')
 }
 
 module.exports.name = name

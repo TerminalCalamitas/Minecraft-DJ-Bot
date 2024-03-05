@@ -1,16 +1,16 @@
-var name = "example"
-var aliases = ["template"]
-var description = "This command us an example"
-var usage = "{prefix}example"
+var name = 'example'
+var aliases = ['template']
+var description = 'This command us an example'
+var usage = '{prefix}example'
 var enabled = false
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require('./../../util.js')
 
 
 function execute(bot, cmd, username, args, handler) {
     // whatever code we want
-    bot.chat("yo i was supposed to remove this command")
+    bot.chat('yo i was supposed to remove this command')
 }
 
 module.exports.name = name

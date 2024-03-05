@@ -1,13 +1,13 @@
-let config = require("./config.json")
+let config = require('./config.json')
 
 function colors(message) {
   if (config.settings.colors_enabled == null) return message
-  return (config.settings.colors_enabled) ? message/*.replace(/&/g, "§")*/ : message.replace(/&[0-9a-fk-or]/g, "")
+  return (config.settings.colors_enabled) ? message/*.replace(/&/g, '§')*/ : message.replace(/&[0-9a-fk-or]/g, '')
 }
 
 function firstLetterUppercase(s) {
-  if(s == undefined) return ""
-  s = typeof s !== "string" ? s.toString() : s
+  if(s == undefined) return ''
+  s = typeof s !== 'string' ? s.toString() : s
   return s.charAt(0).toUpperCase()+s.slice(1)
 }
 
@@ -26,12 +26,12 @@ function wait(time) {
 function clone(arr) {
   if (!(arr instanceof Array)) return null
 	return arr.slice(0)
-}function Error(error, code = "unknown") {
-  return {status: "error", message: error, code: code}
+}function Error(error, code = 'unknown') {
+  return {status: 'error', message: error, code: code}
 }
 
 function Success(message) {
-  return {status: "success", message: message}
+  return {status: 'success', message: message}
 }
 
 function remove(array, elem) {

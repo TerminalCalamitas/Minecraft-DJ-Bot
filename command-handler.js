@@ -1,13 +1,13 @@
-var fs = require("fs")
-var path = require("path")
-var config = require("./config.json")
+var fs = require('fs')
+var path = require('path')
+var config = require('./config.json')
 
 var is_initilized = false
 var commands = {}
 var categories = {}
 
 //main functions
-function load(prefix = config.settings.prefix, directory = "./commands") {
+function load(prefix = config.settings.prefix, directory = './commands') {
   //setup global variable
   this.prefix = prefix
   this.directory = directory
@@ -18,12 +18,12 @@ function load(prefix = config.settings.prefix, directory = "./commands") {
   if (!isDirectory(directory))
     fs.mkdirSync(directory)
 
-  if (categories["default"] == null)
-    categories["default"] = { enabled: true, commands: {} }
+  if (categories['default'] == null)
+    categories['default'] = { enabled: true, commands: {} }
   fs.readdirSync(directory).forEach(file => {
     let absolute_path = path.resolve(`${directory}/${file}`)
 
-    if (isDirectory(absolute_path) && path.parse(absolute_path).name != "default") {
+    if (isDirectory(absolute_path) && path.parse(absolute_path).name != 'default') {
       categories_.push(absolute_path)
       return
     }
@@ -73,8 +73,8 @@ function load(prefix = config.settings.prefix, directory = "./commands") {
   is_initilized = true
 }
 
-function loadCommand(absolute_path, category = "default") {
-  if (!isFile(absolute_path) || path.parse(absolute_path).ext != ".js")
+function loadCommand(absolute_path, category = 'default') {
+  if (!isFile(absolute_path) || path.parse(absolute_path).ext != '.js')
     return
   let file = path.parse(absolute_path).base
 
@@ -99,10 +99,10 @@ function execute(bot, cmd, username, args, ...custom) {
 
 
   if (!is_initilized)
-    return error(`The command handler was not initlized!`, "not_init")
+    return error(`The command handler was not initlized!`, 'not_init')
 
   if (!isCommand(cmd))
-    return error(`Invalid command ${cmd}!`, "invalid_command")
+    return error(`Invalid command ${cmd}!`, 'invalid_command')
 
   let cmd_info = info(cmd)
 
@@ -113,7 +113,7 @@ function execute(bot, cmd, username, args, ...custom) {
     let output = cmd_info.execute(bot, cmd, username, args, this, ...custom)
     return success(output)
   } catch (err) {
-    console.log(`Error while executing ${cmd} (args: [${args.join(", ")}])!`)
+    console.log(`Error while executing ${cmd} (args: [${args.join(', ')}])!`)
     console.log(err.stack)
     return error(`Error while executing the command!`)
   }
@@ -122,7 +122,7 @@ function execute(bot, cmd, username, args, ...custom) {
 
 function reload(command) {
   if (!is_initilized)
-    return error(`The command handler was not initlized!`, "not_init")
+    return error(`The command handler was not initlized!`, 'not_init')
 
   if (command == null) {
     try {
@@ -176,7 +176,7 @@ function reload(command) {
     } catch (err) {
       console.log(`Error while realoding ${command}!`)
       console.log(err.stack)
-      return error(`Couldn't reload ${this.prefix}${command}`, "reload_error")
+      return error(`Couldn't reload ${this.prefix}${command}`, 'reload_error')
     }
   }
 }
@@ -204,11 +204,11 @@ function getCategories() {
 }
 
 function success(message) {
-  return { status: "success", message }
+  return { status: 'success', message }
 }
 
-function error(message, code = "unknown") {
-  return { status: "error", message, code }
+function error(message, code = 'unknown') {
+  return { status: 'error', message, code }
 }
 
 function isFile(filePath) {
@@ -220,7 +220,7 @@ function isDirectory(filePath) {
 }
 
 function isValid(command) {
-  return command != null && typeof command.execute == "function" && typeof command.name == "string" && typeof command.description == "string" && typeof command.usage == "string" && typeof command.enabled == "boolean" && Array.isArray(command.aliases)
+  return command != null && typeof command.execute == 'function' && typeof command.name == 'string' && typeof command.description == 'string' && typeof command.usage == 'string' && typeof command.enabled == 'boolean' && Array.isArray(command.aliases)
 }
 
 // whatever this means
@@ -263,4 +263,4 @@ module.exports.getCategories = getCategories
 module.exports.getCategory = getCategory
 module.exports.info = info
 module.exports.prefix = config.settings.prefix
-module.exports.directory = "./commands"
+module.exports.directory = './commands'

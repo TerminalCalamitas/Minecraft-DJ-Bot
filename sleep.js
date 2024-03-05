@@ -10,9 +10,9 @@ async function sleepInBed(bot, username) {
       matching: block => bot.isABed(block)
     })
 
-    // if a bed is not found, bot will log "Couldn't find a bed"
+    // if a bed is not found, bot will log 'Couldn't find a bed'
     if (!bed) {
-      bot.chat("/msg " + username + " Couldn't find a bed")
+      bot.chat('/msg ' + username + ' Couldn\'t find a bed')
       return
     }
     // path to the bed
@@ -22,7 +22,7 @@ async function sleepInBed(bot, username) {
   
     if (bed) {
       try {
-        bot.chat("/msg " + username + " Going to bed...")
+        bot.chat('/msg ' + username + ' Going to bed...')
         await bot.sleep(bed)
       } catch (err) {
         console.error(err)

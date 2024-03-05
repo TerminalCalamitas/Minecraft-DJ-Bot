@@ -1,11 +1,11 @@
-var name = "style"
-var aliases = ["stl"]
-var description = "Changes how botgpt responds"
-var usage = "{prefix}style <style-name>"
+var name = 'style'
+var aliases = ['stl']
+var description = 'Changes how botgpt responds'
+var usage = '{prefix}style <style-name>'
 var enabled = true
 var hidden = false
 
-var util = require("../../util.js")
+var util = require('../../util.js')
 
 const fs = require('fs')
 
@@ -15,39 +15,39 @@ function execute(bot, cmd, username, args, handler) {
   let activeStyle = 0
 
   switch (args[0]) {
-      case "default":
+      case 'default':
           activeStyle = 0
-          bot.chat("I'm back to normal")
+          bot.chat('I\'m back to normal')
           break
   
-      case "frat-bro":
+      case 'frat-bro':
           activeStyle = 1
-          bot.chat("What's up bro?")
+          bot.chat('What\'s up bro?')
           break
   
-      case "pirate":
+      case 'pirate':
           activeStyle = 2
-          bot.chat("Ahoy me mateys")
+          bot.chat('Ahoy me mateys')
           break
   
-      case "billy":
+      case 'billy':
           activeStyle = 3
-          bot.chat("Hi! Billy Mays here!")
+          bot.chat('Hi! Billy Mays here!')
           break
   
-      case "mario":
+      case 'mario':
           activeStyle = 4
-          bot.chat("It's-a me!")
+          bot.chat('It\'s-a me!')
           break
   
-      case "guide":
+      case 'guide':
           activeStyle = 5
-          bot.chat("How may I be of assistance?")
+          bot.chat('How may I be of assistance?')
           break
   
       default:
-          if (username !== "Admiral_Porg") {
-              bot.chat("/msg " + username + " !style <style> | Styles available: default, frat-bro, pirate, billy, mario, or guide")
+          if (username !== 'Admiral_Porg') {
+              bot.chat('/msg ' + username + ' !style <style> | Styles available: default, frat-bro, pirate, billy, mario, or guide')
           }
           break
   }

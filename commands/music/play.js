@@ -37,7 +37,8 @@ function execute(bot, cmd, username, args, handler) {
 		return
 	}
 
-	var test = file.match(/\\/g); test == null ? 0 : test
+	var test = file.match(/\\/g) 
+	test == null ? 0 : test
 
 	if(file.match(/\//g).length > 2 || test > 0) {// so people dont try to go outside of the ./songs/ directory
 		bot.chat(util.errorMessage("no dont even try with that dir"))

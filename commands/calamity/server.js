@@ -1,11 +1,11 @@
-var name = "server"
-var aliases = ["svr"]
-var description = "Changes which server to connect to"
-var usage = "{prefix}server <smp or hub>"
+var name = 'server'
+var aliases = ['svr']
+var description = 'Changes which server to connect to'
+var usage = '{prefix}server <smp or hub>'
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require('./../../util.js')
 
 const fs = require('fs')
 

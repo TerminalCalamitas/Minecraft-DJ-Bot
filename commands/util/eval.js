@@ -1,21 +1,21 @@
-var name = "eval"
+var name = 'eval'
 var aliases = []
-var description = "Evaluate nodejs code"
-var usage = "{prefix}eval <code>"
+var description = 'Evaluate nodejs code'
+var usage = '{prefix}eval <code>'
 var enabled = true
 var hidden = false
 
-var util = require("./../../util.js")
+var util = require('./../../util.js')
 
-var perms = require("./../../config.json").eval.perms
-var enabled = require("./../../config.json").eval.enabled
+var perms = require('./../../config.json').eval.perms
+var enabled = require('./../../config.json').eval.enabled
 
 function execute(bot, cmd, username, args, handler) {
   if (!perms.includes(username))
-    return bot.chat(util.errorMessage("No permisson to use this command."))
+    return bot.chat(util.errorMessage('No permisson to use this command.'))
     if(!enabled) return bot.chat(util.colors(`&a>eval is currently disabled /`))
   new Promise((resolve, reject) => {
-    resolve(eval(args.join(" ")))
+    resolve(eval(args.join(' ')))
   }).then((output) => {
     util.wait(100).then(() => bot.chat(util.colors(`&a>${output}`)))
   }).catch((err) => {

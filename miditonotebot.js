@@ -1,7 +1,7 @@
-var { Midi } = require("@tonejs/midi")
-var { isValidFile } = require("./parser.js")
+var { Midi } = require('@tonejs/midi')
+var { isValidFile } = require('./parser.js')
 
-var fs = require("fs")
+var fs = require('fs')
 
 var compiledTracks = []
 var timeConstant = (5 / 3) * 12// 20
@@ -19,15 +19,15 @@ Note structure:
   }
 */
 function fixFileName(f) {
-    if (f.includes("/")) {
-        var len = f.split("/").length
-        f = f.split("/")[len - 1]
+    if (f.includes('/')) {
+        var len = f.split('/').length
+        f = f.split('/')[len - 1]
     }
-    return f.replace(".midi", "").replace(".mid", "")
+    return f.replace('.midi', '').replace('.mid', '')
 }
 
 function toNotebot(midiFile, cb) {
-    if (!isValidFile(midiFile) || midiFile.indexOf(".mid") == -1) {
+    if (!isValidFile(midiFile) || midiFile.indexOf('.mid') == -1) {
         throw new Error(`${midiFile} is a invalid file!`)
     }
     var midiFileName = fixFileName(midiFile)//for output later
@@ -38,7 +38,7 @@ function toNotebot(midiFile, cb) {
         cb(undefined, e)
         return
     }
-    console.log(`Converting Midi file ${midi.name == "" ? midiFile : midi.name} to notebot format`)
+    console.log(`Converting Midi file ${midi.name == '' ? midiFile : midi.name} to notebot format`)
 
     compileMIDI(midi)
     var lines = []
@@ -48,18 +48,18 @@ function toNotebot(midiFile, cb) {
         }
     }
 
-    var finalString = ""
+    var finalString = ''
     for (var i = 0; i < lines.length; i++) {
-        finalString += lines[i] + (i === lines.length - 1 ? "" : "\n")
+        finalString += lines[i] + (i === lines.length - 1 ? '' : '\n')
 
     }
-    var songout = "./songs/" + midiFileName + ".txt"
+    var songout = './songs/' + midiFileName + '.txt'
     fs.writeFileSync(songout, finalString)
-    console.log("Done! wrote song to ./songs/" + midiFileName + ".txt")
+    console.log('Done! wrote song to ./songs/' + midiFileName + '.txt')
     fs.unlink(midiFile, () => {})
     midi = undefined
     compiledTracks = undefined
-    finalString = ""
+    finalString = ''
     cb(songout)
 }
 module.exports.toNotebot = toNotebot
