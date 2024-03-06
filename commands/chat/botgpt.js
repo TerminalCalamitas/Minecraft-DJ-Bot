@@ -52,7 +52,6 @@ async function execute(bot, cmd, username, args, handler) {
             })
 
             // Gets the chatgpt response from returned json format
-            console.log(response)
             answer = response.choices[0].message.content
             // Bot says message then changes it so that it is no longer gererating a response
             bot.chat(answer)
