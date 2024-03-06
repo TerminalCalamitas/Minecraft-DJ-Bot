@@ -11,19 +11,10 @@ const autoeat = require('mineflayer-auto-eat').plugin
 const pathfinder = require('mineflayer-pathfinder').pathfinder
 const armormanager = require('mineflayer-armor-manager')
 const pvp = require('mineflayer-pvp').plugin
-const readline = require('node:readline') 
-
-
-// Now this is setting up variables for the runtime
-const rl = readline.createInterface({ // creates our readline interface with our console as input and output
-  input: process.stdin,
-  output: process.stdout
-})
 
 var botVersion = '1.3'
 
 var serverRegex = new RegExp(config.server.msgRegex)
-var owner_uuids = config.owners
 
 console.log('Loading Options')
 // Will load options from runtime args or if they don't exist, load from the config
@@ -67,7 +58,7 @@ bot.on('spawn', () => {
 bot.on('message', async jsonMsg => {
   const msg = jsonMsg.toString()
   console.log(msg)
-  if (serverRegex.test(jsonMsg)) {
+  if (serverRegex.test(msg)) {
     var match = []
     match = msg.match(serverRegex)
     if (match[3].startsWith(cmd_handler.prefix)) {
@@ -100,20 +91,6 @@ bot.on('chat', (username, message) => {
   if (message.startsWith(cmd_handler.prefix) && username != bot.username) {
     send_command(username, message)
   }
-})
-
-rl.on('line', (line) => {
-  readline.moveCursor(process.stdout, 0, -1) // move cursor up one line
-  readline.clearScreenDown(process.stdout) // clear all the lines below the cursor (i.e. the last line we entered)
-
-  line = line.toString()
-  
-  // if (line.startsWith(cmd_handler.prefix)) {
-  //   send_command(line.toString()) // sends the line entered to command handler
-  // } else {
-  //   console.log(line)
-  //   console.log('Message must start with ' + cmd_handler.prefix)
-  // }
 })
 
 // I replace the commas in a message with a unicode character that looks the same. NOTE: this might not work on old versions of minecraft.
