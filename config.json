@@ -41,7 +41,7 @@
       "/cmi chat create BotChat",
       "/chi chat join BotChat"
     ],
-    "active": false
+    "active": true
   },
   "mode": {
     "server": "smp"
@@ -53,6 +53,6 @@
     "9c4f3ae3-5dcf-4df6-a6c8-787dc801069b"
   ],
   "server": {
-    "msgRegex": "\/\\[\\[(.+)\\] (.+) -> me\\] (.+)\/ "
+    "msgRegex": "\\[\\[(.+)\\] (.+) -> me\\] (.+)"
   }
 }
