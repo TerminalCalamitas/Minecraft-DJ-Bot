@@ -13,10 +13,10 @@ function execute(bot, cmd, username, args, handler) {
     const reciever = args.shift()
     
     // make rest of message into a string
-    let msg = args.toString().replaceAll(',',' ')
+    let msg = args.join(' ')
     
     // log the username and message in case of bad message
-    console.log(username + ' said ' + msg + ' to ' + recieve)
+    console.log(username + ' said ' + msg + ' to ' + reciever)
     bot.chat('/msg ' + reciever + ' (This is a message from another player) ' + msg)
     bot.chat('/msg ' + username + ' Message sent.')
 }
